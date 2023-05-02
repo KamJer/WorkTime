@@ -7,10 +7,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/api/pracownicy")
+@RequestMapping("/pracownicy")
 public class PracownikController {
+
+    private static final Logger LOGGER = Logger.getLogger(CzasPracyController.class.getName());
 
     private final PracownikService pracownikService;
 
@@ -20,6 +23,7 @@ public class PracownikController {
 
     @GetMapping("/get")
     public List<Pracownik> getAllPracownicy() {
+
         return pracownikService.getAllPracownicy();
     }
 
@@ -31,8 +35,15 @@ public class PracownikController {
     }
 
     @PostMapping("/post")
-    public Pracownik createPracownik(@RequestBody Pracownik pracownik) {
-        return pracownikService.createPracownik(pracownik);
+    public ResponseEntity<Pracownik> postPracownik(@RequestBody Pracownik pracownik) {
+        LOGGER.info("/pracownicy/post" + " " + pracownik.toString());
+        try {
+            Pracownik savedPracownik =  pracownikService.createPracownik(pracownik);
+            return ResponseEntity.ok(savedPracownik);
+        } catch (Exception e) {
+            LOGGER.info(e.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @DeleteMapping("/delete/{id}")

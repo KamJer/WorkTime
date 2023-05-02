@@ -22,7 +22,6 @@ public class CzasPracy {
 
     @Column(name = "BEGINNING_OF_WORK")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime beginningOfWork;
 
     @Column(name = "END_OF_WORK")

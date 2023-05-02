@@ -2,6 +2,8 @@ package com.my.TimeWork.service;
 
 import com.my.TimeWork.entity.Pracownik;
 import com.my.TimeWork.repository.PracownikRepository;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
