@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 @RequestMapping("/pracownicy")
 public class PracownikController {
 
-    private static final Logger LOGGER = Logger.getLogger(CzasPracyController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(PracownikController.class.getName());
 
     private final PracownikService pracownikService;
 
@@ -22,9 +22,13 @@ public class PracownikController {
     }
 
     @GetMapping("/get")
-    public List<Pracownik> getAllPracownicy() {
-
-        return pracownikService.getAllPracownicy();
+    public ResponseEntity<List<Pracownik>> getAllPracownicy() {
+        LOGGER.info("/pracownicy/get");
+        try {
+            return ResponseEntity.ok(pracownikService.getAllPracownicy());
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @GetMapping("/get/{id}")

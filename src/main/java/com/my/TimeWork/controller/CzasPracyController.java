@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping(path = "/czas-pracy")
+@RequestMapping("/czas-pracy")
 public class CzasPracyController {
 
     private static final Logger LOGGER = Logger.getLogger(CzasPracyController.class.getName());
@@ -23,8 +23,9 @@ public class CzasPracyController {
     @Autowired
     private CzasPracyService czasPracyService;
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<?> getCzasPracy(@PathVariable Long id) {
+        LOGGER.info("/czas-pracy/get/" + id);
         try{
             CzasPracy czasPracy = czasPracyService.getCzasPracyById(id);
             return ResponseEntity.ok(czasPracy);
@@ -40,7 +41,7 @@ public class CzasPracyController {
      */
     @GetMapping("/get-not-ended-czasPracy-and-end-it/{pracownikId}")
     public ResponseEntity<CzasPracy> getNotEndedCzasPracyAndEndIt(@PathVariable Long pracownikId){
-        LOGGER.info("/get-not-ended-czasPracy/" + pracownikId);
+        LOGGER.info("/czas-pracy/get-not-ended-czasPracy/" + pracownikId);
         try {
             CzasPracy notEndedCzasPracy = czasPracyService.getNotEndedCzasPracy(pracownikId);
             notEndedCzasPracy.setEndOfWork(LocalDateTime.now());
@@ -62,7 +63,7 @@ public class CzasPracyController {
      */
     @GetMapping("/get-not-ended-czasPracy/{pracownikId}")
     public ResponseEntity<CzasPracy> getNotEndedCzasPracy(@PathVariable Long pracownikId){
-        LOGGER.info("/get-not-ended-czasPracy/" + pracownikId);
+        LOGGER.info("/czas-pracy/get-not-ended-czasPracy/" + pracownikId);
         try {
             CzasPracy notEndedCzasPracy = czasPracyService.getNotEndedCzasPracy(pracownikId);
             return ResponseEntity.ok(notEndedCzasPracy);
@@ -78,6 +79,7 @@ public class CzasPracyController {
 
     @PostMapping("/post")
     public boolean postCzasPracy(@RequestBody CzasPracy czasPracy) {
+        LOGGER.info("/czas-pracy/post/");
         try {
             czasPracyService.addCzasPracy(czasPracy);
             return true;
@@ -89,7 +91,7 @@ public class CzasPracyController {
 
     @GetMapping("/get-new-czasPracy/{pracownikId}")
     public ResponseEntity<CzasPracy> getNewCzasPracy(@PathVariable Long pracownikId) {
-        LOGGER.info("/get-new-czasPracy/" + pracownikId);
+        LOGGER.info("/czas-pracy/get-new-czasPracy/" + pracownikId);
         CzasPracy czasPracy = new CzasPracy();
         czasPracy.setPracownikId(pracownikId);
         czasPracy.setBeginningOfWork(LocalDateTime.now());
@@ -105,6 +107,7 @@ public class CzasPracyController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteCzasPracy(@PathVariable Long id){
+        LOGGER.info("/czas-pracy/delete/" + id);
         try {
             czasPracyService.deleteCzasPracy(id);
             return ResponseEntity.ok(true);
