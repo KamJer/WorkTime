@@ -1,24 +1,22 @@
 package com.my.TimeWork.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Objects;
 
 @Entity
-@Table(name = "CZAS_PRACY")
-public class CzasPracy {
+@Table(name = "WORK_TIME")
+public class WorkTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "PRACOWNIK_ID")
-    private Long pracownikId;
+    @Column(name = "EMPLOYEE_ID")
+    private Long employeeId;
 
     @Column(name = "BEGINNING_OF_WORK")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
@@ -28,18 +26,15 @@ public class CzasPracy {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime endOfWork;
 
-    // Konstruktor bezparametrowy (dla Springa)
-    public CzasPracy() {}
+    public WorkTime() {}
 
-    // Konstruktor z parametrami
-    public CzasPracy(Long id, Long pracownikId, LocalDateTime beginningOfWork, LocalDateTime endOfWork) {
+    public WorkTime(Long id, Long EmployeeId, LocalDateTime beginningOfWork, LocalDateTime endOfWork) {
         this.id = id;
-        this.pracownikId = pracownikId;
+        this.employeeId = EmployeeId;
         this.beginningOfWork = beginningOfWork;
         this.endOfWork = endOfWork;
     }
 
-    // Gettery i settery
     public Long getId() {
         return id;
     }
@@ -48,12 +43,12 @@ public class CzasPracy {
         this.id = id;
     }
 
-    public Long getPracownikId() {
-        return pracownikId;
+    public Long getEmployeeId() {
+        return employeeId;
     }
 
-    public void setPracownikId(Long pracownikId) {
-        this.pracownikId = pracownikId;
+    public void setEmployeeId(Long EmployeeId) {
+        this.employeeId = EmployeeId;
     }
 
     public LocalDateTime getBeginningOfWork() {

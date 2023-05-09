@@ -1,0 +1,9 @@
+package com.my.TimeWork.repository;
+
+import com.my.TimeWork.entity.Employee;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+
+}
+

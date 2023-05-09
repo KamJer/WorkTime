@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "PRACOWNICY")
-public class Pracownik {
+@Table(name = "EMPLOYEES")
+public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,16 +16,13 @@ public class Pracownik {
     @Column(name = "NAME")
     private String name;
 
-    // Konstruktor bezparametrowy (dla Springa)
-    public Pracownik() {}
+    public Employee() {}
 
-    // Konstruktor z parametrami
-    public Pracownik(Long id, String name) {
+    public Employee(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    // Gettery i settery
     public Long getId() {
         return id;
     }
@@ -48,11 +45,11 @@ public class Pracownik {
             return true;
         }
 
-        if (!(obj instanceof Pracownik)) {
+        if (!(obj instanceof Employee)) {
             return false;
         }
 
-        Pracownik other = (Pracownik) obj;
+        Employee other = (Employee) obj;
         return Objects.equals(id, other.id) && Objects.equals(name, other.name);
     }
 
