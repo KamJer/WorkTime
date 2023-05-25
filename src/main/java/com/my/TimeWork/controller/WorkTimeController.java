@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/czas-pracy")
+@RequestMapping("/work-time")
 public class WorkTimeController {
 
     private static final Logger LOGGER = Logger.getLogger(WorkTimeController.class.getName());
@@ -23,7 +23,7 @@ public class WorkTimeController {
 
     @GetMapping("/get/{id}")
     public ResponseEntity<?> getWorkTime(@PathVariable Long id) {
-        LOGGER.info("/czas-pracy/get/" + id);
+        LOGGER.info("/work-time/get/" + id);
         try{
             WorkTime workTime = workTimeService.getWorkTimeById(id);
             return ResponseEntity.ok(workTime);
@@ -39,7 +39,7 @@ public class WorkTimeController {
      */
     @GetMapping("/get-not-ended-WorkTime-and-end-it/{EmployeeId}")
     public ResponseEntity<WorkTime> getNotEndedWorkTimeAndEndIt(@PathVariable Long EmployeeId){
-        LOGGER.info("/czas-pracy/get-not-ended-WorkTime/" + EmployeeId);
+        LOGGER.info("/work-time/get-not-ended-WorkTime/" + EmployeeId);
         try {
             WorkTime notEndedWorkTime = workTimeService.getNotEndedWorkTime(EmployeeId);
             notEndedWorkTime.setEndOfWork(LocalDateTime.now());
@@ -61,7 +61,7 @@ public class WorkTimeController {
      */
     @GetMapping("/get-not-ended-WorkTime/{EmployeeId}")
     public ResponseEntity<WorkTime> getNotEndedWorkTime(@PathVariable Long EmployeeId){
-        LOGGER.info("/czas-pracy/get-not-ended-WorkTime/" + EmployeeId);
+        LOGGER.info("/work-time/get-not-ended-WorkTime/" + EmployeeId);
         try {
             WorkTime notEndedWorkTime = workTimeService.getNotEndedWorkTime(EmployeeId);
             return ResponseEntity.ok(notEndedWorkTime);
@@ -77,7 +77,7 @@ public class WorkTimeController {
 
     @PostMapping("/post")
     public boolean postWorkTime(@RequestBody WorkTime workTime) {
-        LOGGER.info("/czas-pracy/post/");
+        LOGGER.info("/work-time/post/");
         try {
             workTimeService.addWorkTime(workTime);
             return true;
@@ -89,7 +89,7 @@ public class WorkTimeController {
 
     @GetMapping("/get-new-WorkTime/{EmployeeId}")
     public ResponseEntity<WorkTime> getNewWorkTime(@PathVariable Long EmployeeId) {
-        LOGGER.info("/czas-pracy/get-new-WorkTime/" + EmployeeId);
+        LOGGER.info("/work-time/get-new-WorkTime/" + EmployeeId);
         WorkTime workTime = new WorkTime();
         workTime.setEmployeeId(EmployeeId);
         workTime.setBeginningOfWork(LocalDateTime.now());
