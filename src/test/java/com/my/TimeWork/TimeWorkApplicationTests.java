@@ -24,20 +24,20 @@ class TimeWorkApplicationTests {
 	private EmployeeService employeeService;
 
 	@Test
-	public void testGetAllPracownicy() {
+	public void testGetAllEmployees() {
 		// przygotowanie danych testowych
-		List<Employee> pracownicy = new ArrayList<>();
-		pracownicy.add(new Employee(1L, "Jan Kowalski"));
-		pracownicy.add(new Employee(2L, "Anna Nowak"));
+		List<Employee> employees = new ArrayList<>();
+		employees.add(new Employee(1L, "Jan Kowalski"));
+		employees.add(new Employee(2L, "Anna Nowak"));
 
 		// konfiguracja zachowania mocka
-		Mockito.when(employeeRepository.findAll()).thenReturn(pracownicy);
+		Mockito.when(employeeRepository.findAll()).thenReturn(employees);
 
 		// wywołanie metody do testowania
 		Iterable<Employee> result = employeeService.getAllEmployee();
 
 		// weryfikacja wyniku
-		Assertions.assertEquals(pracownicy, result);
+		Assertions.assertEquals(employees, result);
 	}
 
 	@Test

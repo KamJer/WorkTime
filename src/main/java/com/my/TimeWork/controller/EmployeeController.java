@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/pracownicy")
+@RequestMapping("/employees")
 public class EmployeeController {
 
     private static final Logger LOGGER = Logger.getLogger(EmployeeController.class.getName());
@@ -22,8 +22,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<List<Employee>> getAllPracownicy() {
-        LOGGER.info("/pracownicy/get");
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        LOGGER.info("/employees/get");
         try {
             return ResponseEntity.ok(employeeService.getAllEmployee());
         } catch (Exception e) {
@@ -40,7 +40,7 @@ public class EmployeeController {
 
     @PostMapping("/post")
     public ResponseEntity<Employee> postEmployee(@RequestBody Employee employee) {
-        LOGGER.info("/pracownicy/post" + " " + employee.toString());
+        LOGGER.info("/employees/post" + " " + employee.toString());
         try {
             Employee savedEmployee =  employeeService.creatEemployee(employee);
             return ResponseEntity.ok(savedEmployee);
