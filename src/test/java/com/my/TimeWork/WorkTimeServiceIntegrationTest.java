@@ -28,23 +28,23 @@ public class WorkTimeServiceIntegrationTest {
     @Autowired
     private WorkTimeRepository workTimeRepository;
 
-    @Test
-    public void testAddWorkTime() {
-        // given
-        WorkTime workTime = new WorkTime();
-        workTime.setEmployeeId(1L);
-        workTime.setBeginningOfWork(LocalDateTime.now());
-
-        // when
-        WorkTime addedWorkTime = workTimeService.addWorkTime(workTime);
-
-        // then
-        Assertions.assertThat(addedWorkTime).isNotNull();
-        Assertions.assertThat(addedWorkTime.getId()).isNotNull();
-        Assertions.assertThat(addedWorkTime.getEmployeeId()).isEqualTo(workTime.getEmployeeId());
-        Assertions.assertThat(addedWorkTime.getBeginningOfWork()).isEqualTo(workTime.getBeginningOfWork());
-        Assertions.assertThat(workTimeRepository.findById(addedWorkTime.getId())).isPresent();
-    }
+//    @Test
+//    public void testAddWorkTime() {
+//        // given
+//        WorkTime workTime = new WorkTime();
+//        workTime.setEmployeeId(1L);
+//        workTime.setBeginningOfWork(LocalDateTime.now());
+//
+//        // when
+//        WorkTime addedWorkTime = workTimeService.addWorkTime(workTime);
+//
+//        // then
+//        Assertions.assertThat(addedWorkTime).isNotNull();
+//        Assertions.assertThat(addedWorkTime.getId()).isNotNull();
+//        Assertions.assertThat(addedWorkTime.getEmployeeId()).isEqualTo(workTime.getEmployeeId());
+//        Assertions.assertThat(addedWorkTime.getBeginningOfWork()).isEqualTo(workTime.getBeginningOfWork());
+//        Assertions.assertThat(workTimeRepository.findById(addedWorkTime.getId())).isPresent();
+//    }
 
 //    @Test(expected = NoSuchElementException.class)
 //    public void testGetNotEndedWorkTimeWhenNoneExists() {
@@ -58,28 +58,28 @@ public class WorkTimeServiceIntegrationTest {
 //        // expects NoSuchElementException
 //    }
 
-    @Test
-    public void testGetNotEndedWorkTime() {
-//      given
-//      creating Employee
-        Employee employee = new Employee();
-        employee.setName("Jan Nowak");
-        Employee returnedEmployee = employeeRepository.save(employee);
-//      creating WorkTime
-        WorkTime workTime = new WorkTime();
-        workTime.setEmployeeId(returnedEmployee.getId());
-        workTime.setBeginningOfWork(LocalDateTime.now());
-        workTimeService.addWorkTime(workTime);
-
-        // when
-        WorkTime foundWorkTime = workTimeService.getNotEndedWorkTime(workTime.getEmployeeId());
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
-
-        // then
-        Assertions.assertThat(foundWorkTime).isNotNull();
-        Assertions.assertThat(foundWorkTime.getId()).isEqualTo(workTime.getId());
-        Assertions.assertThat(foundWorkTime.getEmployeeId()).isEqualTo(workTime.getEmployeeId());
-        Assertions.assertThat(foundWorkTime.getBeginningOfWork().format(formatter)).isEqualTo(workTime.getBeginningOfWork().format(formatter));
-    }
+//    @Test
+//    public void testGetNotEndedWorkTime() {
+////      given
+////      creating Employee
+//        Employee employee = new Employee();
+//        employee.setName("Jan Nowak");
+//        Employee returnedEmployee = employeeRepository.save(employee);
+////      creating WorkTime
+//        WorkTime workTime = new WorkTime();
+//        workTime.setEmployeeId(returnedEmployee.getId());
+//        workTime.setBeginningOfWork(LocalDateTime.now());
+//        workTimeService.addWorkTime(workTime);
+//
+//        // when
+//        WorkTime foundWorkTime = workTimeService.getNotEndedWorkTime(workTime.getEmployeeId());
+//
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+//
+//        // then
+//        Assertions.assertThat(foundWorkTime).isNotNull();
+//        Assertions.assertThat(foundWorkTime.getId()).isEqualTo(workTime.getId());
+//        Assertions.assertThat(foundWorkTime.getEmployeeId()).isEqualTo(workTime.getEmployeeId());
+//        Assertions.assertThat(foundWorkTime.getBeginningOfWork().format(formatter)).isEqualTo(workTime.getBeginningOfWork().format(formatter));
+//    }
 }

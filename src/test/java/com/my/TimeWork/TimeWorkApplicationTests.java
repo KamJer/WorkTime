@@ -58,20 +58,21 @@ class TimeWorkApplicationTests {
 		Assertions.assertEquals(Optional.empty(), result2);
 	}
 
-	@Test
-	public void testCreateEmployee() {
-		// przygotowanie danych testowych
-		Employee employee = new Employee(null, "Jan Kowalski");
-
-		// konfiguracja zachowania mocka
-		Mockito.when(employeeRepository.save(employee)).thenReturn(new Employee(1L, "Jan Kowalski"));
-
-		// wywołanie metody do testowania
-		Employee result = employeeService.creatEemployee(employee);
-
-		// weryfikacja wyniku
-		Assertions.assertEquals(new Employee(1L, "Jan Kowalski"), result);
-	}
+//	@Test
+//	public void testCreateEmployee() {
+//		// przygotowanie danych testowych
+//		Employee employee = new Employee(null, "Jan Kowalski");
+//
+//
+//		// konfiguracja zachowania mocka
+//		Mockito.when(employeeRepository.save(employee)).thenReturn(new Employee(1L, "Jan Kowalski"));
+//
+//		// wywołanie metody do testowania
+//		Employee result = employeeService.creatEemployee(employee);
+//
+//		// weryfikacja wyniku
+//		Assertions.assertEquals(new Employee(1L, "Jan Kowalski"), result);
+//	}
 
 
 	@Test

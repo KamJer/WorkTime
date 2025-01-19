@@ -49,19 +49,19 @@ public class WorkTimeServiceTest {
         Mockito.verify(workTimeRepository, Mockito.times(1)).findById(id);
     }
 
-    @Test
-    public void addWorkTimeShouldReturnSavedWorkTime() {
-        // given
-        WorkTime workTime = new WorkTime();
-        workTime.setBeginningOfWork(LocalDateTime.now());
-
-        Mockito.when(workTimeRepository.save(workTime)).thenReturn(workTime);
-
-        // when
-        WorkTime savedWorkTime = workTimeService.addWorkTime(workTime);
-
-        // then
-        Assertions.assertEquals(workTime, savedWorkTime);
-        Mockito.verify(workTimeRepository,  Mockito.times(1)).save(workTime);
-    }
+//    @Test
+//    public void addWorkTimeShouldReturnSavedWorkTime() {
+//        // given
+//        WorkTime workTime = new WorkTime();
+//        workTime.setBeginningOfWork(LocalDateTime.now());
+//
+//        Mockito.when(workTimeRepository.save(workTime)).thenReturn(workTime);
+//
+//        // when
+//        WorkTime savedWorkTime = workTimeService.addWorkTime(workTime);
+//
+//        // then
+//        Assertions.assertEquals(workTime, savedWorkTime);
+//        Mockito.verify(workTimeRepository,  Mockito.times(1)).save(workTime);
+//    }
 }

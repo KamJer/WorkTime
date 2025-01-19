@@ -1,20 +1,22 @@
 package com.my.TimeWork.service;
 
+import com.my.TimeWork.dto.EmployeeDto;
 import com.my.TimeWork.entity.Employee;
 import com.my.TimeWork.repository.EmployeeRepository;
+import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
-    public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
+    private final ModelMapper modelMapper;
 
     public List<Employee> getAllEmployee() {
         return employeeRepository.findAll();
@@ -24,7 +26,8 @@ public class EmployeeService {
         return employeeRepository.findById(id);
     }
 
-    public Employee creatEemployee(Employee employee) {
+    public Employee creatEemployee(EmployeeDto employeeDto) {
+        Employee employee = modelMapper.map(employeeDto, Employee.class);
         return employeeRepository.save(employee);
     }
 
