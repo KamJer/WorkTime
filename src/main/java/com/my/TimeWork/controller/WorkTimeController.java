@@ -3,6 +3,7 @@ package com.my.TimeWork.controller;
 import com.my.TimeWork.dto.WorkTimeDto;
 import com.my.TimeWork.entity.WorkTime;
 import com.my.TimeWork.service.WorkTimeService;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.NonUniqueResultException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +18,21 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping("/work-time")
 @Log4j2
+@AllArgsConstructor
 public class WorkTimeController {
 
-    @Autowired
     private WorkTimeService workTimeService;
 
-    @PostMapping("/{id}")
+    @PostMapping("/{employeeId}")
     public ResponseEntity<Boolean> endOrStartWorkTime(@PathVariable Long employeeId) {
         log.info("POST: /work-time/{}", employeeId);
         return ResponseEntity.ok(workTimeService.createOrEndWorkTime(employeeId));
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Boolean> getIfWorkTimeStarted(Long employeeId) {
+    @GetMapping("/{employeeId}")
+    public ResponseEntity<Boolean> isWorkTimeStarted(@PathVariable Long employeeId) {
         log.info("GET: /work-time/{}", employeeId);
-        return ResponseEntity.ok(workTimeService.)
+        return ResponseEntity.ok(workTimeService.isWorkTimeStarted(employeeId));
     }
 
 //    @GetMapping("/get/{id}")

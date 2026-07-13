@@ -20,18 +20,18 @@ public class WorkTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "EMPLOYEE_ID")
-    @ManyToOne()
-    private Long employeeId;
+    @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = false)
+    private Employee employee;
 
-    @Column(name = "BEGINNING_OF_WORK")
+    @Column(name = "beginning_of_work")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime beginningOfWork;
 
-    @Column(name = "END_OF_WORK")
+    @Column(name = "end_of_work")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime endOfWork;
 

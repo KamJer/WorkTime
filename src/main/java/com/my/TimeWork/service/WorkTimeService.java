@@ -2,6 +2,7 @@ package com.my.TimeWork.service;
 
 import com.my.TimeWork.dto.WorkTimeDto;
 import com.my.TimeWork.entity.WorkTime;
+import com.my.TimeWork.repository.EmployeeRepository;
 import com.my.TimeWork.repository.WorkTimeRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -18,6 +19,7 @@ import java.util.Optional;
 public class WorkTimeService {
 
     private final WorkTimeRepository workTimeRepository;
+    private final EmployeeRepository employeeRepository;
 
     private final ModelMapper modelMapper;
 
@@ -39,27 +41,30 @@ public class WorkTimeService {
 //        return workTime;
 //    }
 
-    public boolean createOrEndWorkTime(Long employeeId) {
-        try {
+    public boolean isWorkTimeStarted(Long employeeId) {
+        return workTimeRepository.findByEmployeeIdAndEndOfWorkIsNull(employeeId).isPresent();
 
-            Optional<WorkTime> workTimeOptional = workTimeRepository.findByEmployeeIdAndEndOfWorkIsNull(employeeId);
-            return workTimeOptional.map(this::endOldWorkTime).orElseGet(() -> createNewWorkTime(employeeId));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    }
+
+    public boolean createOrEndWorkTime(Long employeeId) {
+        Optional<WorkTime> workTimeOptional = workTimeRepository.findByEmployeeIdAndEndOfWorkIsNull(employeeId);
+        return workTimeOptional.map(this::endOldWorkTime).orElseGet(() -> createNewWorkTime(employeeId));
     }
 
     private boolean endOldWorkTime(WorkTime workTime) {
         workTime.setEndOfWork(LocalDateTime.now());
+        workTimeRepository.save(workTime);
         return true;
     }
 
     private boolean createNewWorkTime(Long employeeId) {
-        WorkTime workTime = new WorkTime();
-        workTime.setEmployeeId(employeeId);
-        workTime.setBeginningOfWork(LocalDateTime.now());
-        workTimeRepository.save(workTime);
-        return true;
+        employeeRepository.findById(employeeId).ifPresent(employee -> {
+            WorkTime workTime = new WorkTime();
+            workTime.setEmployee(employee);
+            workTime.setBeginningOfWork(LocalDateTime.now());
+            workTimeRepository.save(workTime);
+        });
+        return false;
     }
 
 //    public WorkTime addWorkTime(WorkTimeDto workTimeDto) {
