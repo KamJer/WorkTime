@@ -1,6 +1,8 @@
 package com.my.TimeWork.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +23,8 @@ public class Employee {
     @Column(name = "ID")
     private Long id;
 
+    @NotBlank(message = "Name is required")
+    @Size(max = 128)
     @Column(name = "NAME")
     private String name;
 
@@ -42,4 +46,3 @@ public class Employee {
         return Objects.hash(id, name);
     }
 }
-

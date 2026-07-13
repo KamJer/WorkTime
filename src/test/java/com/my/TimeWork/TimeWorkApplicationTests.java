@@ -16,16 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.modelmapper.ModelMapper;
-
 @ExtendWith(MockitoExtension.class)
 class TimeWorkApplicationTests {
 
 	@Mock
 	private EmployeeRepository employeeRepository;
-
-	@Mock
-	private ModelMapper modelMapper;
 
 	@InjectMocks
 	private EmployeeService employeeService;
@@ -61,17 +56,15 @@ class TimeWorkApplicationTests {
 	@Test
 	public void testCreateEmployee() {
 		EmployeeDto employeeDto = new EmployeeDto(null, "Jan Kowalski");
-		Employee mappedEmployee = new Employee(null, "Jan Kowalski");
 		Employee savedEmployee = new Employee(1L, "Jan Kowalski");
 
-		Mockito.when(modelMapper.map(employeeDto, Employee.class)).thenReturn(mappedEmployee);
-		Mockito.when(employeeRepository.save(mappedEmployee)).thenReturn(savedEmployee);
+		Mockito.when(employeeRepository.save(Mockito.any(Employee.class))).thenReturn(savedEmployee);
 
 		Employee result = employeeService.createEmployee(employeeDto);
 
 		Assertions.assertEquals(savedEmployee, result);
 		Assertions.assertEquals("Jan Kowalski", result.getName());
-		Mockito.verify(employeeRepository, Mockito.times(1)).save(mappedEmployee);
+		Mockito.verify(employeeRepository, Mockito.times(1)).save(Mockito.any(Employee.class));
 	}
 
 	@Test

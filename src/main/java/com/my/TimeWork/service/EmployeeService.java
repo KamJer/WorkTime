@@ -4,7 +4,6 @@ import com.my.TimeWork.dto.EmployeeDto;
 import com.my.TimeWork.entity.Employee;
 import com.my.TimeWork.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +15,6 @@ public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
-    private final ModelMapper modelMapper;
-
     public List<Employee> getAllEmployee() {
         return employeeRepository.findAll();
     }
@@ -27,7 +24,8 @@ public class EmployeeService {
     }
 
     public Employee createEmployee(EmployeeDto employeeDto) {
-        Employee employee = modelMapper.map(employeeDto, Employee.class);
+        Employee employee = new Employee();
+        employee.setName(employeeDto.getName());
         return employeeRepository.save(employee);
     }
 
