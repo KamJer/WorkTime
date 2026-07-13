@@ -67,7 +67,7 @@ class TimeWorkApplicationTests {
 		Mockito.when(modelMapper.map(employeeDto, Employee.class)).thenReturn(mappedEmployee);
 		Mockito.when(employeeRepository.save(mappedEmployee)).thenReturn(savedEmployee);
 
-		Employee result = employeeService.creatEemployee(employeeDto);
+		Employee result = employeeService.createEmployee(employeeDto);
 
 		Assertions.assertEquals(savedEmployee, result);
 		Assertions.assertEquals("Jan Kowalski", result.getName());

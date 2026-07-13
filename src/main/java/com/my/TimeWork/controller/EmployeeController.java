@@ -36,7 +36,7 @@ public class EmployeeController {
     @PostMapping("/post")
     public ResponseEntity<Employee> postEmployee(@RequestBody EmployeeDto employeeDto) {
         log.info("POST: /employees/post: {}", employeeDto);
-        return ResponseEntity.ok(employeeService.creatEemployee(employeeDto));
+        return ResponseEntity.ok(employeeService.createEmployee(employeeDto));
     }
 
     @DeleteMapping("/delete/{id}")

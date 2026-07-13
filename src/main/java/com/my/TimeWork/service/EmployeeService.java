@@ -26,7 +26,7 @@ public class EmployeeService {
         return employeeRepository.findById(id);
     }
 
-    public Employee creatEemployee(EmployeeDto employeeDto) {
+    public Employee createEmployee(EmployeeDto employeeDto) {
         Employee employee = modelMapper.map(employeeDto, Employee.class);
         return employeeRepository.save(employee);
     }
